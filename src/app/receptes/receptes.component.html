@@ -1,0 +1,92 @@
+
+<div >
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <input type="text" class="form-control" name="filterPost" placeholder="Buscar" [(ngModel)]="filterPost">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let x of arrayreceptes  | filter:filterPost">
+  <ngb-tabset class="">
+    <ngb-tab title="Receptes">
+      <ng-template ngbTabContent>
+        <div>
+
+          <h2 (click)="onClickMe(this.x)" style="text-align: left">{{x.name}}</h2>
+          <p style="text-align: left">{{x.descripcion}}</p>
+          <p style="text-align: left">{{x.ingreditents}}</p>
+
+
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Editar</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h4>Titol</h4>
+              <input type="text" class="form-control" name="filterPost" placeholder="Filter..." [(ngModel)]="x.name">
+              <h4>Descripció</h4>
+              <input type="text" class="form-control" name="filterPost" placeholder="Filter..." [(ngModel)]="x.descripcion">
+              <h4>Ingredients</h4>
+              <input type="text" class="form-control" name="filterPost" placeholder="Filter..." [(ngModel)]="x.ingreditents">
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Guardar</button>
+            </div>
+          </ng-template>
+
+      
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="Comentaris"><!--Comentaris------------------------------------------------------------------->
+      <ng-template ngbTabContent>
+        <ngb-rating [(rate)]="currentRate"></ngb-rating>
+        <hr>
+        <h2>Valoració: <b>{{currentRate}}</b></h2>
+        <form  [formGroup]="formulari" (ngSubmit)="onSubmit(x.id)" >
+          <!--<div class="form-group ">
+            <h4 for="sel1">La a teva opinio:</h4>
+            <select formControlName="valoracio" id="sel1">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select></div>-->
+          <div class="form-group">
+            <h4 >Afegeix un comentari per la recepta {{x.name}}</h4>
+            <textarea formControlName="descripcio" type="text" class="form-group col-md-10"></textarea>
+          </div>
+          <div class="form-group" style="margin-top: 10px">
+            <button type="submit" class="btn btn-primary">Submit</button><!--fromcontroler="nom"-->
+          </div>
+
+
+        </form>
+          <div  style=" margin-top: 20px">
+<br>
+            <h1 >Comentaris</h1>
+
+            <div  style="text-align: left; " *ngFor="let y of arraycomentaris">
+
+              <div *ngIf="x.id==y.id" >
+                 <h4>Descripció: </h4><p>{{y.descripcio}}</p>
+                <h4>Puntuació: </h4><p>  {{y.valoracio}}</p>
+
+              </div>
+            </div>
+
+          </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+
+</div>
+

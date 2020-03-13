@@ -1,0 +1,27 @@
+
+<div class="col-md-11 text-left ">
+ <!-- <input type="text" [(ngModel)]="hola">
+  {{hola}}-->
+
+  <form  [formGroup]="formulari" (ngSubmit)="onSubmit()" >
+    <div class="form-group ">
+      <label>Nom</label>
+      <input formControlName="nom"  type="text" value="" class="form-control" >
+    </div>
+    <div class="form-group">
+      <label >Descripció</label>
+      <textarea formControlName="descripcio" type="text" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+      <label >Ingredients</label>
+      <textarea formControlName="ingredients" type="text" class="form-control"></textarea>
+    </div>
+    <div class="form-group" style="margin-top: 10px">
+      <button type="submit" class="btn btn-primary">Submit</button><!--fromcontroler="nom"-->
+    </div>
+
+
+  </form>
+</div>
+
+
